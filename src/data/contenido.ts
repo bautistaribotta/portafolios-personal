@@ -170,8 +170,9 @@ export const proyectos: Proyecto[] = [
     imagen: "captura-pagina-web",
     ancho: 1600,
     alto: 900,
-    enlace: "https://github.com/bautistaribotta/bautistaribotta.github.io",
-    codigo: "https://github.com/bautistaribotta/bautistaribotta.github.io",
+    enlace: "https://bautistaribotta.com",
+    enVivo: "https://bautistaribotta.com",
+    codigo: "https://github.com/bautistaribotta/portafolios-personal",
     tecnologias: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui"],
   },
 ]
