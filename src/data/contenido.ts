@@ -90,8 +90,7 @@ export const proyectos: Proyecto[] = [
     imagen: "captura-ios-app-frencia",
     ancho: 1920,
     alto: 1080,
-    enlace: "https://github.com/bautistaribotta/frencia",
-    codigo: "https://github.com/bautistaribotta/frencia",
+    enlace: "https://frencia.fit",
     tecnologias: ["React Native", "Expo Go", "TypeScript", "Supabase", "PostgreSQL"],
     enDesarrollo: true,
   },
@@ -104,7 +103,6 @@ export const proyectos: Proyecto[] = [
     alto: 810,
     enlace: "https://app.frencia.fit",
     enVivo: "https://app.frencia.fit",
-    codigo: "https://github.com/bautistaribotta/frencia-web",
     tecnologias: ["React", "TypeScript", "Vite", "Supabase", "Cloudflare"],
   },
   {
