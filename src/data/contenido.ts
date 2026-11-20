@@ -9,6 +9,12 @@ export type Proyecto = {
   codigo?: string
   tecnologias: string[]
   enDesarrollo?: boolean
+  /** Mockup que muestra la captura en la sección de proyectos */
+  dispositivo: "laptop" | "celular"
+  /** Color (oklch) que tiñe el fondo mientras el proyecto está activo */
+  tinte: string
+  /** Captura vertical para el mockup de celular (sin extensión, en /img) */
+  imagenVertical?: string
 }
 
 export type GrupoHabilidades = {
@@ -62,6 +68,8 @@ export const habilidades: GrupoHabilidades[] = [
 export const proyectos: Proyecto[] = [
   {
     nombre: "Southern Honey Group",
+    dispositivo: "laptop",
+    tinte: "oklch(0.78 0.15 75)",
     descripcion:
       "Aplicación web para una productora de miel, con gestión de productos y visualización de datos.",
     imagen: "captura-productora-de-miel-webapp",
@@ -74,6 +82,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Neda Solar Energy",
+    dispositivo: "laptop",
+    tinte: "oklch(0.86 0.16 95)",
     descripcion:
       "Colaborador en la página web de una empresa instaladora de paneles solares en la ciudad de La Plata.",
     imagen: "captura-neda-solar-energy",
@@ -85,6 +95,9 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Frencia",
+    dispositivo: "celular",
+    tinte: "oklch(0.88 0.19 125)",
+    imagenVertical: "captura-ios-app-frencia-vertical",
     descripcion:
       "App mobile para iOS y Android para entrenar en el gimnasio: armá tus rutinas, seguí cada serie con temporizador de descanso, revisá tu historial y compartí el resumen de cada entrenamiento.",
     imagen: "captura-ios-app-frencia",
@@ -96,6 +109,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Frencia Web",
+    dispositivo: "laptop",
+    tinte: "oklch(0.82 0.18 130)",
     descripcion:
       "Versión web de Frencia pensada para escritorio: planificá tus rutinas con arrastrar y soltar y revisá tu historial y progreso, sincronizado con la app mobile.",
     imagen: "captura-web-frencia",
@@ -107,6 +122,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Frencia Landing",
+    dispositivo: "laptop",
+    tinte: "oklch(0.85 0.17 120)",
     descripcion:
       "Landing page pública de Frencia, optimizada para SEO y rendimiento, que lleva a la app web y a las tiendas de la app mobile.",
     imagen: "captura-landing-frencia",
@@ -119,6 +136,9 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Gestoapp",
+    dispositivo: "celular",
+    tinte: "oklch(0.7 0.12 20)",
+    imagenVertical: "captura-app-gestoapp-vertical",
     descripcion:
       "App mobile para iOS y Android que funciona como gestograma digital para obstetricia: calcula edad gestacional y fecha probable de parto, y permite llevar un registro de pacientes.",
     imagen: "captura-app-gestoapp",
@@ -130,6 +150,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Rubén Curto Apicultura",
+    dispositivo: "laptop",
+    tinte: "oklch(0.72 0.14 60)",
     descripcion:
       "Sistema de gestión para un acopio apícola construido sobre la base del software de Southern Honey Group, con nuevas funcionalidades para el tratamiento de marcos y cera estampada.",
     imagen: "captura-ruben-curto-inicio",
@@ -141,6 +163,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Acopiadora de Miel",
+    dispositivo: "laptop",
+    tinte: "oklch(0.68 0.13 50)",
     descripcion:
       "Sistema de gestión completo para una acopiadora de miel, incluyendo control de inventario, proveedores y ventas.",
     imagen: "captura-acopiadora-miel",
@@ -152,6 +176,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Claudia Arias",
+    dispositivo: "laptop",
+    tinte: "oklch(0.74 0.1 350)",
     descripcion:
       "Colaborador en la tienda online de indumentaria de Claudia Arias, con modificaciones básicas de HTML y CSS sobre Tienda Nube.",
     imagen: "captura-claudia-arias",
@@ -163,6 +189,8 @@ export const proyectos: Proyecto[] = [
   },
   {
     nombre: "Portafolio Personal",
+    dispositivo: "laptop",
+    tinte: "oklch(0.7 0.13 160)",
     descripcion:
       "Este mismo sitio web, diseñado y desarrollado buscando aplicar conocimientos. Ahora con React y shadcn/ui.",
     imagen: "captura-pagina-web",

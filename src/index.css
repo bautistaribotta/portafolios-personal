@@ -144,7 +144,36 @@
   }
 }
 
+/* Tinte del proyecto activo: registrado como color para que la transición lo interpole */
+@property --tinte {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 @layer components {
+  /* Halo de color del proyecto activo, mezclado con el fondo del tema */
+  .fondo-tinte {
+    transition: --tinte 900ms ease;
+    background: radial-gradient(
+      55% 60% at 62% 50%,
+      color-mix(in oklch, var(--tinte) 20%, transparent),
+      transparent 75%
+    );
+  }
+
+  /* Texto con contorno para la fila "aprendiendo" de las habilidades */
+  .texto-contorno {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--muted-foreground);
+  }
+
   /* Cuadricula de fondo del hero, al estilo Vercel */
   .fondo-cuadricula {
     background-image:
