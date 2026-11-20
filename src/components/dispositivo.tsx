@@ -5,14 +5,15 @@ import { cn } from "@/lib/utils"
 export type TipoDispositivo = "laptop" | "celular"
 
 /*
-  El mockup es un solo bloque de proporción 16:11. Laptop y celular son dos recortes
+  El mockup es un solo bloque de proporción 16:11. La pantalla de la laptop es 16:9,
+  igual que las capturas, y queda centrada en vertical. Laptop y celular son dos recortes
   (clip-path) del mismo bloque: pasar de uno a otro es interpolar los insets, sin
   tocar width ni height. Los radios van en cqw para que escalen con el mockup.
 */
 export const RECORTE: Record<TipoDispositivo, { cuerpo: string; pantalla: string }> = {
   laptop: {
-    cuerpo: "inset(0% 4% 13.45% 4% round 2.4cqw)",
-    pantalla: "inset(2.33% 5.6% 16.95% 5.6% round 0.9cqw)",
+    cuerpo: "inset(9.12% 4% 13.57% 4% round 2.4cqw)",
+    pantalla: "inset(11.45% 5.6% 15.9% 5.6% round 0.9cqw)",
   },
   celular: {
     cuerpo: "inset(0% 33.5% 0% 33.5% round 6.4cqw)",
@@ -22,7 +23,7 @@ export const RECORTE: Record<TipoDispositivo, { cuerpo: string; pantalla: string
 
 /** Zona visible de la pantalla de cada dispositivo, para ubicar las capturas */
 export const HUECO: Record<TipoDispositivo, CSSProperties> = {
-  laptop: { top: "2.33%", left: "5.6%", width: "88.8%", height: "80.72%" },
+  laptop: { top: "11.45%", left: "5.6%", width: "88.8%", height: "72.65%" },
   celular: { top: "2.04%", left: "34.9%", width: "30.2%", height: "95.92%" },
 }
 
@@ -60,7 +61,7 @@ export function Dispositivo({ tipo, className, children }: Props) {
         />
         {/* Base de la laptop */}
         <div
-          className="disp-base absolute top-[86.55%] left-0 h-[4.4%] w-full origin-top rounded-b-[2.4cqw] bg-[linear-gradient(to_bottom,oklch(0.42_0_0),oklch(0.22_0_0))]"
+          className="disp-base absolute top-[86.43%] left-0 h-[4.4%] w-full origin-top rounded-b-[2.4cqw] bg-[linear-gradient(to_bottom,oklch(0.42_0_0),oklch(0.22_0_0))]"
           style={{ opacity: laptop ? 1 : 0 }}
         >
           <div className="mx-auto h-[45%] w-[14%] rounded-b-[1cqw] bg-black/40" />

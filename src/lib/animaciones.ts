@@ -43,6 +43,12 @@ export function saltarA(y: number) {
   else window.scrollTo({ top: y, behavior: "instant" })
 }
 
+/** Desliza suavemente hasta una posición; con Lenis activo lo hace Lenis para no pelearse con él */
+export function deslizarA(y: number) {
+  if (lenis) lenis.scrollTo(y, { duration: 0.7, easing: (t) => 1 - Math.pow(1 - t, 3) })
+  else window.scrollTo({ top: y, behavior: "smooth" })
+}
+
 /** Recalcula las posiciones de ScrollTrigger cuando terminan de cargar fuentes e imágenes */
 export function refrescarAlCargar() {
   let activo = true

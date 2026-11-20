@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { proyectos, redes, type Proyecto } from "@/data/contenido"
 import { useMedia } from "@/hooks/use-media"
-import { gsap, MEDIOS, saltarA, ScrollTrigger, useGSAP } from "@/lib/animaciones"
+import { deslizarA, gsap, MEDIOS, saltarA, ScrollTrigger, useGSAP } from "@/lib/animaciones"
 import { cn } from "@/lib/utils"
 
 const cargarVisor = () => import("@/components/secciones/visor-captura")
@@ -21,7 +21,7 @@ const dosCifras = (n: number) => String(n).padStart(2, "0")
 function Captura({ p, cargar, prioridad }: { p: Proyecto; cargar: boolean; prioridad?: boolean }) {
   const celular = p.dispositivo === "celular" && p.imagenVertical
   return (
-    <div className="captura absolute" style={HUECO[celular ? "celular" : "laptop"]}>
+    <div className="captura absolute bg-muted" style={HUECO[celular ? "celular" : "laptop"]}>
       {cargar &&
         (celular ? (
           <img
@@ -130,7 +130,7 @@ function ProyectosEscritorio({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }
         raiz.style.setProperty("--tinte", proyectos[i].tinte)
         textos.forEach((t, j) => (t.style.pointerEvents = j === i ? "auto" : "none"))
         setActivo(i)
-        setHasta((h) => Math.max(h, i + 1))
+        setHasta((h) => Math.max(h, i + 2))
       }
 
       const tl = gsap.timeline({
@@ -142,14 +142,25 @@ function ProyectosEscritorio({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }
           pin: true,
           scrub: 0.6,
           invalidateOnRefresh: true,
-          snap: { snapTo: "labels", duration: { min: 0.25, max: 0.7 }, delay: 0.08, ease: "power1.inOut" },
           onUpdate: (self) => {
             const i = Math.round(self.progress * (total - 1))
             if (i !== actual) activar(i)
           },
         },
       })
-      disparador.current = tl.scrollTrigger!
+      const st = tl.scrollTrigger!
+      disparador.current = st
+
+      // Snap propio: el snap de ScrollTrigger se pelea con Lenis y deja la escena entre dos
+      // proyectos. Cuando el scroll se detiene, se desliza hasta el proyecto más cercano.
+      const alDetenerse = () => {
+        const y = window.scrollY
+        if (y <= st.start || y >= st.end) return
+        const paso = (st.end - st.start) / (total - 1)
+        const destino = st.start + Math.round((y - st.start) / paso) * paso
+        if (Math.abs(destino - y) > 2) deslizarA(destino)
+      }
+      ScrollTrigger.addEventListener("scrollEnd", alDetenerse)
 
       tl.addLabel("p0")
       for (let i = 1; i < total; i++) {
@@ -205,6 +216,8 @@ function ProyectosEscritorio({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }
         }
         tl.addLabel(`p${i}`, `${desde}+=1`)
       }
+
+      return () => ScrollTrigger.removeEventListener("scrollEnd", alDetenerse)
     },
     { scope: escena }
   )
@@ -255,7 +268,7 @@ function ProyectosEscritorio({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }
             onPointerEnter={cargarVisor}
             onFocus={cargarVisor}
             aria-label={`Ampliar captura: ${proyectos[activo].nombre}`}
-            className="absolute right-[7%] bottom-[16%] flex size-9 items-center justify-center rounded-md border bg-background/80 text-foreground backdrop-blur-sm transition-colors outline-none hover:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="absolute right-[7.5%] bottom-[18%] flex size-9 items-center justify-center rounded-md border bg-background/80 text-foreground backdrop-blur-sm transition-colors outline-none hover:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             <Maximize2 className="size-4" />
           </button>
@@ -328,7 +341,7 @@ function ProyectosEscenas({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }) {
               onPointerEnter={cargarVisor}
               onFocus={cargarVisor}
               aria-label={`Ampliar captura: ${p.nombre}`}
-              className="absolute right-[7%] bottom-[16%] flex size-8 items-center justify-center rounded-md border bg-background/80 text-foreground backdrop-blur-sm"
+              className="absolute right-[7.5%] bottom-[18%] flex size-8 items-center justify-center rounded-md border bg-background/80 text-foreground backdrop-blur-sm"
             >
               <Maximize2 className="size-3.5" />
             </button>
