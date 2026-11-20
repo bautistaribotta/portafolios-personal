@@ -1,3 +1,5 @@
+import { useRef } from "react"
+
 import {
   Sheet,
   SheetClose,
@@ -18,6 +20,9 @@ type Props = {
 
 /** Se carga recien cuando hace falta, junto con el codigo del panel lateral */
 export default function MenuMovil({ abierto, onCambiar, onCerrado, activa }: Props) {
+  // Sección elegida en el menú: al cerrarse el panel, el foco va ahí y no al botón del menú
+  const elegida = useRef<string | null>(null)
+
   return (
     <Sheet open={abierto} onOpenChange={onCambiar}>
       <SheetContent
@@ -25,7 +30,10 @@ export default function MenuMovil({ abierto, onCambiar, onCerrado, activa }: Pro
         className="w-64"
         onCloseAutoFocus={(e) => {
           e.preventDefault()
-          onCerrado()
+          const destino = elegida.current && document.getElementById(elegida.current)
+          elegida.current = null
+          if (destino) destino.focus({ preventScroll: true })
+          else onCerrado()
         }}
       >
         <SheetHeader>
@@ -38,6 +46,7 @@ export default function MenuMovil({ abierto, onCambiar, onCerrado, activa }: Pro
               <SheetClose asChild>
                 <a
                   href={`#${id}`}
+                  onClick={() => (elegida.current = id)}
                   className={cn(
                     "block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-foreground",
                     activa === id ? "text-foreground" : "text-muted-foreground"

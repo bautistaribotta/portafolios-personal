@@ -37,7 +37,8 @@ export function SobreMi() {
       mm.add({ escritorio: MEDIOS.escritorio, movil: MEDIOS.movil }, (ctx) => {
         const { escritorio } = ctx.conditions as { escritorio: boolean }
         const parrafo = raiz.current!.querySelector(".sobre-mi-parrafo")!
-        const { words } = SplitText.create(parrafo, { type: "words" })
+        // aria "none": un <p> no admite aria-label, así que las palabras quedan legibles tal cual
+        const { words } = SplitText.create(parrafo, { type: "words", aria: "none" })
 
         // Cada palabra se ilumina a medida que se scrollea (escritorio) o de una vez (móvil)
         if (escritorio) {
@@ -95,7 +96,7 @@ export function SobreMi() {
   )
 
   return (
-    <section ref={raiz} id="about" className="scroll-mt-16 border-t py-24 md:py-32">
+    <section ref={raiz} id="about" tabIndex={-1} className="scroll-mt-16 outline-none border-t py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <TituloSeccion numero="01" titulo="Sobre mí" />
 

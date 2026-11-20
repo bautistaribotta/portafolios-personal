@@ -1,7 +1,9 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import { Pause, Play } from "lucide-react"
 
 import { TituloSeccion } from "@/components/secciones/titulo-seccion"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { habilidades } from "@/data/contenido"
 import { gsap, MEDIOS, ScrollTrigger, useGSAP } from "@/lib/animaciones"
@@ -40,6 +42,10 @@ function Marquee({ items, className }: { items: string[]; className?: string }) 
 
 export function Habilidades() {
   const raiz = useRef<HTMLElement>(null)
+  // Los marquees se mueven solos y sin fin: tiene que existir una forma de frenarlos (WCAG 2.2.2)
+  const [pausado, setPausado] = useState(false)
+  const pausadoRef = useRef(pausado)
+  pausadoRef.current = pausado
 
   useGSAP(
     () => {
@@ -56,7 +62,7 @@ export function Habilidades() {
         let visible = false
 
         const tick = (_t: number, dt: number) => {
-          if (!visible) return
+          if (!visible || pausadoRef.current) return
           const paso = (dt / 1000) * VELOCIDAD_BASE * estado.velocidad
           pistas.forEach((_, i) => {
             x[i] = envolver(x[i] + paso * sentido[i])
@@ -102,14 +108,27 @@ export function Habilidades() {
   )
 
   return (
-    <section ref={raiz} id="skills" className="scroll-mt-16 overflow-hidden border-t py-24 md:py-32">
+    <section ref={raiz} id="skills" tabIndex={-1} className="scroll-mt-16 outline-none overflow-hidden border-t py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <TituloSeccion numero="02" titulo="Habilidades" />
       </div>
 
-      <div className="mb-16 space-y-2 md:mb-24">
+      <div className="mb-4 space-y-2 motion-reduce:mb-16 md:motion-reduce:mb-24">
         <Marquee items={principales} className="text-foreground" />
         <Marquee items={aprendiendo} className="texto-contorno" />
+      </div>
+
+      <div className="mx-auto mb-16 flex max-w-6xl justify-end px-6 motion-reduce:hidden md:mb-24">
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => setPausado((p) => !p)}
+          className="text-muted-foreground"
+        >
+          {pausado ? <Play /> : <Pause />}
+          {pausado ? "Reanudar animación" : "Pausar animación"}
+        </Button>
       </div>
 
       <div className="mx-auto max-w-6xl px-6">

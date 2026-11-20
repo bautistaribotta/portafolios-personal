@@ -20,18 +20,22 @@ export function Hero() {
         const { escritorio } = ctx.conditions as { escritorio: boolean }
 
         // Entrada: el nombre se arma letra por letra. Nunca arranca invisible del todo,
-        // así el texto ya cuenta como pintado para el LCP.
+        // así el texto ya cuenta como pintado para el LCP. El h1 ya tiene su aria-label,
+        // así que las letras sueltas se ocultan a los lectores de pantalla.
         SplitText.create(".hero-nombre", {
           type: "chars",
           autoSplit: true,
-          onSplit: (self) =>
-            gsap.from(self.chars, {
+          aria: "none",
+          onSplit: (self) => {
+            self.chars.forEach((letra) => letra.setAttribute("aria-hidden", "true"))
+            return gsap.from(self.chars, {
               yPercent: 90,
               opacity: 0.08,
               duration: 0.9,
               ease: "power4.out",
               stagger: 0.035,
-            }),
+            })
+          },
         })
         gsap.from(".hero-entra", {
           y: 24,
@@ -155,7 +159,9 @@ export function Hero() {
               Software Engineering Student
             </Badge>
 
-            <h1 className="hero-nombre font-display text-6xl font-semibold tracking-tighter text-foreground md:text-8xl">
+            <h1
+              aria-label="Bautista Ribotta"
+              className="hero-nombre font-display text-6xl font-semibold tracking-tighter text-foreground md:text-8xl">
               Bautista
               <br />
               <span className="text-primary">Ribotta</span>
@@ -208,7 +214,7 @@ export function Hero() {
                     srcSet="/img/imagen-personal-320.webp 320w, /img/imagen-personal-640.webp 640w"
                     sizes="(min-width: 1024px) 320px, 128px"
                     alt="Bautista Ribotta"
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="size-full object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
                   />
                 </div>
               </div>
@@ -232,7 +238,7 @@ export function Hero() {
         className="hero-scroll absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
       >
         <span className="font-mono text-[10px] tracking-widest uppercase">Scroll</span>
-        <ArrowDown className="size-4 animate-bounce" />
+        <ArrowDown className="size-4 motion-safe:animate-bounce" />
       </a>
     </section>
   )

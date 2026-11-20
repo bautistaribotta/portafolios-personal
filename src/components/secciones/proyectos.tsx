@@ -17,9 +17,18 @@ const VisorCaptura = lazy(cargarVisor)
 const total = proyectos.length
 const dosCifras = (n: number) => String(n).padStart(2, "0")
 
+type PropsCaptura = {
+  p: Proyecto
+  cargar: boolean
+  prioridad?: boolean
+  /** Montada por adelantado pero todavía invisible: baja prioridad para no competir con la activa */
+  oculta?: boolean
+}
+
 /** Captura ubicada en la pantalla del dispositivo que le corresponde al proyecto */
-function Captura({ p, cargar, prioridad }: { p: Proyecto; cargar: boolean; prioridad?: boolean }) {
+function Captura({ p, cargar, prioridad, oculta }: PropsCaptura) {
   const celular = p.dispositivo === "celular" && p.imagenVertical
+  const fetchPriority = oculta ? "low" : undefined
   return (
     <div className="captura absolute bg-muted" style={HUECO[celular ? "celular" : "laptop"]}>
       {cargar &&
@@ -30,6 +39,7 @@ function Captura({ p, cargar, prioridad }: { p: Proyecto; cargar: boolean; prior
             width={420}
             height={910}
             loading={prioridad ? "eager" : "lazy"}
+            fetchPriority={fetchPriority}
             decoding="async"
             className="size-full object-cover object-top"
           />
@@ -42,6 +52,7 @@ function Captura({ p, cargar, prioridad }: { p: Proyecto; cargar: boolean; prior
             width={p.ancho}
             height={p.alto}
             loading={prioridad ? "eager" : "lazy"}
+            fetchPriority={fetchPriority}
             decoding="async"
             className="size-full object-cover object-top"
           />
@@ -259,7 +270,7 @@ function ProyectosEscritorio({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }
         <div className="relative mx-auto w-full max-w-[min(100%,108svh)]">
           <Dispositivo tipo={tipoInicial}>
             {proyectos.map((p, i) => (
-              <Captura key={p.nombre} p={p} cargar={i <= hasta} />
+              <Captura key={p.nombre} p={p} cargar={i <= hasta} oculta={i !== activo} />
             ))}
           </Dispositivo>
           <button
@@ -366,7 +377,7 @@ export function Proyectos() {
   }
 
   return (
-    <section id="projects" className="scroll-mt-16 border-t pt-24 pb-24 md:pt-32 md:pb-32">
+    <section id="projects" tabIndex={-1} className="scroll-mt-16 outline-none border-t pt-24 pb-24 md:pt-32 md:pb-32">
       <div className="mx-auto max-w-6xl px-6">
         <TituloSeccion
           numero="03"

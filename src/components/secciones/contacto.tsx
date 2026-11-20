@@ -73,7 +73,7 @@ export function Contacto() {
   }
 
   return (
-    <section ref={raiz} id="contact" className="scroll-mt-16 border-t py-24 md:py-32">
+    <section ref={raiz} id="contact" tabIndex={-1} className="scroll-mt-16 outline-none border-t py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs tracking-wider text-muted-foreground uppercase">04 / Contacto</p>
         <h2 className="contacto-titular font-display mt-4 mb-16 text-6xl leading-[0.95] font-semibold tracking-tighter text-foreground sm:text-7xl md:mb-20 lg:text-9xl">
@@ -96,7 +96,8 @@ export function Contacto() {
 
           <Card className="contacto-entra bg-card/50">
             <CardContent>
-              <form onSubmit={enviar} className="space-y-6">
+              {/* action y method hacen que el formulario funcione aunque falle el JavaScript */}
+              <form action={ENDPOINT} method="POST" onSubmit={enviar} className="space-y-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="nombre">Nombre</Label>
@@ -111,6 +112,9 @@ export function Contacto() {
                       required
                       placeholder="tu@email.com"
                       autoComplete="email"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
                     />
                   </div>
                 </div>
@@ -122,11 +126,11 @@ export function Contacto() {
                     required
                     rows={6}
                     placeholder="Tu mensaje..."
-                    className="min-h-36 resize-none"
+                    className="min-h-36 resize-y"
                   />
                 </div>
                 <div className="flex items-center gap-4">
-                  <Button type="submit" disabled={estado !== "inicial"}>
+                  <Button type="submit" disabled={estado === "enviando" || estado === "enviado"}>
                     {estado === "enviando" && <Loader2 className="animate-spin" />}
                     {estado === "enviado" && <Check />}
                     {(estado === "inicial" || estado === "error") && <Send />}

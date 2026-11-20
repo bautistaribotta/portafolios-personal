@@ -7,7 +7,8 @@
 /* Fuentes Geist (paquete npm "geist" de Vercel) */
 @font-face {
   font-family: "Geist";
-  src: url("./fonts/Geist-Variable.woff2") format("woff2");
+  /* En public/ con nombre fijo para poder precargarla desde index.html */
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -135,6 +136,8 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* Escala la fuente de respaldo a la altura x de Geist para que el texto no salte al cargarla */
+    font-size-adjust: from-font;
     transition: background-color 300ms ease, color 300ms ease;
   }
 

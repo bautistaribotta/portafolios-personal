@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SplitText } from "gsap/SplitText"
-import Lenis from "lenis"
+import type Lenis from "lenis"
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
 
@@ -20,20 +20,34 @@ export const MEDIOS = {
 
 let lenis: Lenis | null = null
 
-/** Smooth scroll con Lenis, sincronizado con ScrollTrigger. Devuelve la limpieza. */
+/**
+ * Smooth scroll con Lenis, sincronizado con ScrollTrigger. Lenis solo se usa en escritorio,
+ * así que se descarga recién acá y no viaja en el bundle principal. Devuelve la limpieza.
+ */
 export function iniciarScrollSuave() {
-  lenis = new Lenis({ anchors: true, autoRaf: false })
-  lenis.on("scroll", ScrollTrigger.update)
+  let cancelado = false
+  let limpiar = () => {}
 
-  const tick = (tiempo: number) => lenis?.raf(tiempo * 1000)
-  gsap.ticker.add(tick)
-  gsap.ticker.lagSmoothing(0)
+  import("lenis").then(({ default: Lenis }) => {
+    if (cancelado) return
+    lenis = new Lenis({ autoRaf: false })
+    lenis.on("scroll", ScrollTrigger.update)
+
+    const tick = (tiempo: number) => lenis?.raf(tiempo * 1000)
+    gsap.ticker.add(tick)
+    gsap.ticker.lagSmoothing(0)
+
+    limpiar = () => {
+      gsap.ticker.remove(tick)
+      gsap.ticker.lagSmoothing(500, 33)
+      lenis?.destroy()
+      lenis = null
+    }
+  })
 
   return () => {
-    gsap.ticker.remove(tick)
-    gsap.ticker.lagSmoothing(500, 33)
-    lenis?.destroy()
-    lenis = null
+    cancelado = true
+    limpiar()
   }
 }
 
@@ -47,6 +61,23 @@ export function saltarA(y: number) {
 export function deslizarA(y: number) {
   if (lenis) lenis.scrollTo(y, { duration: 0.7, easing: (t) => 1 - Math.pow(1 - t, 3) })
   else window.scrollTo({ top: y, behavior: "smooth" })
+}
+
+/**
+ * Lleva a una sección (o arriba de todo si no hay destino) y le pasa el foco, para que
+ * quien navega con teclado siga desde ahí. Respeta scroll-margin y el movimiento reducido.
+ */
+export function irASeccion(destino: HTMLElement | null) {
+  const enfocar = () => destino?.focus({ preventScroll: true })
+
+  if (lenis) {
+    lenis.scrollTo(destino ?? 0, { onComplete: enfocar })
+    return
+  }
+  // Sin Lenis, el scroll-behavior de html decide si es suave (y ya respeta movimiento reducido)
+  if (destino) destino.scrollIntoView()
+  else window.scrollTo({ top: 0 })
+  enfocar()
 }
 
 /** Recalcula las posiciones de ScrollTrigger cuando terminan de cargar fuentes e imágenes */
