@@ -2,7 +2,6 @@ import { useRef } from "react"
 
 import { Dispositivo, HUECO } from "@/components/dispositivo"
 import { IconoDescargarArchivo, IconoFlechaAbajo, IconoGithub, IconoLinkedin, IconoUbicacion } from "@/components/iconos"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tooltip } from "@/components/ui/tooltip"
 import { redes } from "@/data/contenido"
@@ -150,14 +149,6 @@ export function Hero() {
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-28 md:py-40">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div className="hero-texto space-y-8">
-            <Badge
-              variant="outline"
-              className="hero-entra gap-2 rounded-full px-3 py-1 font-mono text-muted-foreground"
-            >
-              <span className="size-1.5 rounded-full bg-highlight" />
-              Software Engineering Student
-            </Badge>
-
             <h1
               aria-label="Bautista Ribotta"
               className="hero-nombre font-display text-6xl font-semibold tracking-tighter text-foreground md:text-8xl">
