@@ -76,7 +76,7 @@ export function Contacto() {
     <section ref={raiz} id="contact" tabIndex={-1} className="scroll-mt-16 outline-none border-t py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs tracking-wider text-muted-foreground uppercase">04 / Contacto</p>
-        <h2 className="contacto-titular font-display mt-4 mb-16 text-6xl leading-[0.95] font-semibold tracking-tighter text-foreground sm:text-7xl md:mb-20 lg:text-9xl">
+        <h2 className="contacto-titular font-display mt-4 mb-16 text-6xl leading-[1.15] font-semibold tracking-tighter text-foreground sm:text-7xl md:mb-20 lg:text-9xl">
           ¿Construimos <span className="text-primary">algo?</span>
         </h2>
 

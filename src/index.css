@@ -30,6 +30,23 @@
   font-display: swap;
 }
 
+/* Fuente de titulos: esquinas cortadas a 45 grados, como los iconos (licencia OFL en public/fonts) */
+@font-face {
+  font-family: "Chakra Petch";
+  src: url("/fonts/ChakraPetch-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  src: url("/fonts/ChakraPetch-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
   Tema por defecto: "negro", inspirado en Vercel.
   Fondo negro, texto blanco y grises neutros sin croma.
@@ -95,7 +112,7 @@
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
   --font-serif: "Geist Serif", "Times New Roman", serif;
   /* Fuente de titulos: la unica linea que cambia entre las versiones */
-  --font-display: var(--font-sans);
+  --font-display: "Chakra Petch", var(--font-sans);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
