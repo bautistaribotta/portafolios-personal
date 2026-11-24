@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 
+import { CursorAcompanante } from "@/components/cursor-acompanante"
 import { Encabezado } from "@/components/encabezado"
 import { Contacto } from "@/components/secciones/contacto"
 import { Habilidades } from "@/components/secciones/habilidades"
@@ -59,6 +60,7 @@ export default function App() {
         <Contacto />
       </main>
       <Pie />
+      <CursorAcompanante />
     </>
   )
 }
