@@ -1,11 +1,10 @@
 import { useRef } from "react"
 
-import { Dispositivo, HUECO } from "@/components/dispositivo"
 import { IconoDescargarArchivo, IconoFlechaAbajo, IconoGithub, IconoLinkedin, IconoUbicacion } from "@/components/iconos"
 import { Button } from "@/components/ui/button"
 import { Tooltip } from "@/components/ui/tooltip"
 import { redes } from "@/data/contenido"
-import { gsap, MEDIOS, SplitText, useGSAP } from "@/lib/animaciones"
+import { gsap, SplitText, useGSAP } from "@/lib/animaciones"
 
 export function Hero() {
   const raiz = useRef<HTMLElement>(null)
@@ -14,9 +13,7 @@ export function Hero() {
     () => {
       const mm = gsap.matchMedia()
 
-      mm.add({ escritorio: MEDIOS.escritorio, movil: MEDIOS.movil }, (ctx) => {
-        const { escritorio } = ctx.conditions as { escritorio: boolean }
-
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
         // Entrada: el nombre se arma letra por letra. Nunca arranca invisible del todo,
         // así el texto ya cuenta como pintado para el LCP. El h1 ya tiene su aria-label,
         // así que las letras sueltas se ocultan a los lectores de pantalla.
@@ -50,54 +47,6 @@ export function Hero() {
           ease: "power3.out",
           delay: 0.2,
         })
-
-        if (!escritorio) return
-
-        // Al scrollear la foto vuela hasta la pantalla de la laptop
-        const foto = raiz.current!.querySelector<HTMLElement>(".hero-foto")!
-        const pantalla = raiz.current!.querySelector<HTMLElement>(".hero-pantalla")!
-        const delta = () => {
-          const a = foto.getBoundingClientRect()
-          const b = pantalla.getBoundingClientRect()
-          return {
-            x: b.left + b.width / 2 - (a.left + a.width / 2),
-            y: b.top + b.height / 2 - (a.top + a.height / 2),
-            escala: (b.height * 0.92) / a.height,
-          }
-        }
-
-        const tl = gsap.timeline({
-          defaults: { ease: "power2.inOut" },
-          scrollTrigger: {
-            trigger: raiz.current,
-            start: "top top",
-            end: "+=100%",
-            pin: true,
-            scrub: 0.6,
-            invalidateOnRefresh: true,
-          },
-        })
-
-        tl.to(".hero-texto", { x: -120, opacity: 0, duration: 0.5 }, 0)
-          .to(".hero-chip, .hero-scroll", { opacity: 0, duration: 0.25 }, 0)
-          .to(
-            ".hero-foto",
-            {
-              x: () => delta().x,
-              y: () => delta().y,
-              scale: () => delta().escala,
-              duration: 0.7,
-            },
-            0.05
-          )
-          .fromTo(
-            ".hero-laptop",
-            { opacity: 0, scale: 0.9, y: 40 },
-            { opacity: 1, scale: 1, y: 0, duration: 0.6 },
-            0.2
-          )
-          .to(".hero-foto", { opacity: 0, duration: 0.2 }, 0.7)
-          .fromTo(".hero-captura", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 0.65)
       })
 
       return () => mm.revert()
@@ -113,42 +62,9 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Laptop de destino: aparece al scrollear, solo en escritorio */}
-      <div
-        className="pointer-events-none absolute inset-0 hidden items-center justify-center px-6 lg:flex"
-        aria-hidden="true"
-      >
-        <Dispositivo tipo="laptop" className="hero-laptop w-[min(58vw,98svh)] opacity-0">
-          <div className="hero-pantalla absolute" style={HUECO.laptop}>
-            <div className="hero-captura absolute inset-0 flex items-center justify-center gap-[6%] bg-[radial-gradient(circle_at_30%_40%,var(--glow),transparent_60%),var(--background)] opacity-0">
-              <img
-                src="/img/imagen-personal-640.webp"
-                alt=""
-                width={720}
-                height={1280}
-                loading="lazy"
-                decoding="async"
-                className="h-[78%] w-auto rounded-[1cqw] object-cover"
-              />
-              <div className="space-y-[0.8cqw]">
-                <p className="font-mono text-[1.3cqw] tracking-widest text-muted-foreground uppercase">
-                  bautista.dev
-                </p>
-                <p className="font-display text-[4.4cqw] leading-none font-semibold tracking-tighter text-foreground">
-                  Bautista
-                  <br />
-                  <span className="text-primary">Ribotta</span>
-                </p>
-                <p className="text-[1.5cqw] text-muted-foreground">Full-stack · web y mobile</p>
-              </div>
-            </div>
-          </div>
-        </Dispositivo>
-      </div>
-
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-28 md:py-40">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
-          <div className="hero-texto space-y-8">
+          <div className="space-y-8">
             <h1
               aria-label="Bautista Ribotta"
               className="hero-nombre font-display text-6xl font-semibold tracking-tighter text-foreground md:text-8xl">
@@ -209,7 +125,7 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="hero-chip absolute -bottom-5 -left-8 hidden items-center gap-3 rounded-lg border bg-background/90 px-4 py-3 shadow-lg backdrop-blur-md lg:flex">
+              <div className="absolute -bottom-5 -left-8 hidden items-center gap-3 rounded-lg border bg-background/90 px-4 py-3 shadow-lg backdrop-blur-md lg:flex">
                 <IconoUbicacion className="size-4 text-highlight" />
                 <div>
                   <p className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
@@ -225,7 +141,7 @@ export function Hero() {
 
       <a
         href="#about"
-        className="hero-scroll absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
       >
         <span className="font-mono text-[10px] tracking-widest uppercase">Scroll</span>
         <IconoFlechaAbajo className="size-4 motion-safe:animate-bounce" />
