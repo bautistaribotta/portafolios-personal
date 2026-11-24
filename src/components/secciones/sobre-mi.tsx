@@ -3,7 +3,6 @@ import { useRef } from "react"
 import { IconoBirrete, IconoObjetivo } from "@/components/iconos"
 import { TituloSeccion } from "@/components/secciones/titulo-seccion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { estadisticas } from "@/data/contenido"
 import { gsap, MEDIOS, SplitText, useGSAP } from "@/lib/animaciones"
 
 const tarjetas = [
@@ -20,12 +19,6 @@ const tarjetas = [
       "Desarrollo aplicaciones web y mobile de punta a punta. Trabajo el backend con Python y Django, el frontend con React, TypeScript y Tailwind, y las apps mobile con React Native y Expo. Sumo herramientas de IA como Claude Code a mi flujo de trabajo para desarrollar más rápido.",
   },
 ]
-
-/** Separa "+10" en prefijo y número para poder contarlo */
-function partir(valor: string) {
-  const [, prefijo = "", numero = "0"] = valor.match(/^(\D*)(\d+)$/) ?? []
-  return { prefijo, numero: Number(numero) }
-}
 
 export function SobreMi() {
   const raiz = useRef<HTMLElement>(null)
@@ -63,21 +56,6 @@ export function SobreMi() {
               scrollTrigger: { trigger: parrafo, start: "top 80%", toggleActions: "play none none reverse" },
             }
           )
-        }
-
-        // Las estadísticas cuentan desde 0, una sola vez
-        for (const el of gsap.utils.toArray<HTMLElement>(".sobre-mi-cifra")) {
-          const { prefijo, numero } = partir(el.dataset.valor!)
-          const contador = { n: 0 }
-          gsap.to(contador, {
-            n: numero,
-            duration: 1.6,
-            ease: "power2.out",
-            onUpdate: () => {
-              el.textContent = prefijo + Math.round(contador.n)
-            },
-            scrollTrigger: { trigger: el, start: "top 90%", once: true },
-          })
         }
 
         gsap.from(".sobre-mi-tarjeta", {
@@ -119,20 +97,6 @@ export function SobreMi() {
                 <p className="text-sm leading-relaxed text-muted-foreground">{texto}</p>
               </CardContent>
             </Card>
-          ))}
-        </div>
-
-        <div className="mt-4 grid grid-cols-3 divide-x overflow-hidden rounded-xl border">
-          {estadisticas.map(({ valor, etiqueta }) => (
-            <div key={etiqueta} className="p-6 md:p-8">
-              <p
-                data-valor={valor}
-                className="sobre-mi-cifra font-display text-3xl font-semibold tracking-tight text-primary tabular-nums md:text-5xl"
-              >
-                {valor}
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground md:text-sm">{etiqueta}</p>
-            </div>
           ))}
         </div>
       </div>

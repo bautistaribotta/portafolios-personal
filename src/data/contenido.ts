@@ -36,12 +36,6 @@ export const redes = {
   email: "mailto:bautistaribotta@hotmail.com",
 }
 
-export const estadisticas = [
-  { valor: "25", etiqueta: "Años" },
-  { valor: "+2", etiqueta: "Años de experiencia" },
-  { valor: "+10", etiqueta: "Proyectos completados" },
-]
-
 export const habilidades: GrupoHabilidades[] = [
   {
     titulo: "Lenguajes",
