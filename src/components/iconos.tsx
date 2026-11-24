@@ -113,8 +113,7 @@ export function IconoDescargarArchivo(props: SVGProps<SVGSVGElement>) {
 export function IconoUbicacion(props: SVGProps<SVGSVGElement>) {
   return (
     <Icono {...props}>
-      <path d="M5 3h14v9.5l-7 8.5-7-8.5z" />
-      <Macizo d="M10 7h4v4h-4z" />
+      <path d="M12 13v9M17 8a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
     </Icono>
   )
 }
@@ -131,8 +130,7 @@ export function IconoEnlaceExterno(props: SVGProps<SVGSVGElement>) {
 export function IconoCodigo(props: SVGProps<SVGSVGElement>) {
   return (
     <Icono {...props}>
-      <path d="m8 5-6 7 6 7M16 5l6 7-6 7" />
-      <Macizo d="M10 10h4v4h-4z" />
+      <path d="m7 6-5 6 5 6M17 6l5 6-5 6M14 4l-4 16" />
     </Icono>
   )
 }
