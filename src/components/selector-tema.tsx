@@ -21,7 +21,7 @@ export function SelectorTema({ tema, onCambiar, className }: Props) {
     <div
       role="radiogroup"
       aria-label="Tema de colores"
-      className={cn("inline-flex items-center gap-0.5 rounded-full border p-0.5", className)}
+      className={cn("inline-flex items-center gap-0.5 rounded-full border border-muted-foreground/50 bg-background/70 p-0.5", className)}
     >
       {opciones.map(({ valor, etiqueta, Icono }) => {
         const activo = tema === valor
