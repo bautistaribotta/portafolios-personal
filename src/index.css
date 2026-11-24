@@ -78,7 +78,6 @@
   /* Tokens propios: color de realce (enlaces, acentos) y brillo decorativo */
   --highlight: oklch(0.985 0 0);
   --glow: oklch(1 0 0 / 0.06);
-  --grid-line: oklch(1 0 0 / 0.05);
 }
 
 /* Tema "verde": los colores originales del portafolio */
@@ -104,7 +103,6 @@
 
   --highlight: oklch(0.7 0.12 160);
   --glow: oklch(0.55 0.15 160 / 0.12);
-  --grid-line: oklch(0.7 0.12 160 / 0.06);
 }
 
 @theme inline {
@@ -192,15 +190,6 @@
   .texto-contorno {
     color: transparent;
     -webkit-text-stroke: 1px var(--muted-foreground);
-  }
-
-  /* Cuadricula de fondo del hero, al estilo Vercel */
-  .fondo-cuadricula {
-    background-image:
-      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, oklch(0 0 0) 40%, transparent 100%);
   }
 
   .brillo {

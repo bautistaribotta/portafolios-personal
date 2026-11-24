@@ -1,12 +1,17 @@
-import { useRef } from "react"
+import { lazy, Suspense, useRef } from "react"
 
 import { IconoDescargarArchivo, IconoFlechaAbajo, IconoGithub, IconoLinkedin, IconoUbicacion } from "@/components/iconos"
 import { Button } from "@/components/ui/button"
 import { Tooltip } from "@/components/ui/tooltip"
 import { redes } from "@/data/contenido"
+import { useMedia } from "@/hooks/use-media"
 import { gsap, SplitText, useGSAP } from "@/lib/animaciones"
 
+// Solo se descarga en escritorio, aparte del bundle principal
+const FondoHero = lazy(() => import("@/components/secciones/fondo-hero"))
+
 export function Hero() {
+  const escritorio = useMedia("(min-width: 1024px)")
   const raiz = useRef<HTMLElement>(null)
 
   useGSAP(
@@ -56,11 +61,16 @@ export function Hero() {
 
   return (
     <section ref={raiz} className="relative flex min-h-svh items-center overflow-hidden">
-      <div className="fondo-cuadricula pointer-events-none absolute inset-0" aria-hidden="true" />
       <div
-        className="brillo pointer-events-none absolute -top-40 left-1/2 size-[48rem] -translate-x-1/2"
+        className="brillo pointer-events-none absolute lg:hidden -top-40 left-1/2 size-[48rem] -translate-x-1/2"
         aria-hidden="true"
       />
+
+      {escritorio && (
+        <Suspense fallback={null}>
+          <FondoHero />
+        </Suspense>
+      )}
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-28 md:py-40">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
