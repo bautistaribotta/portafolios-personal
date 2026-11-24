@@ -379,7 +379,6 @@ export function Proyectos() {
     <section id="projects" tabIndex={-1} className="scroll-mt-16 outline-none border-t pt-24 pb-24 md:pt-32 md:pb-32">
       <div className="mx-auto max-w-6xl px-6">
         <TituloSeccion
-          numero="03"
           titulo="Proyectos"
           descripcion="Aplicaciones web, mobile y de escritorio en las que trabajé."
         />

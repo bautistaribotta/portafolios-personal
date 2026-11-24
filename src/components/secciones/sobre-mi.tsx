@@ -76,7 +76,7 @@ export function SobreMi() {
   return (
     <section ref={raiz} id="about" tabIndex={-1} className="scroll-mt-16 outline-none border-t py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <TituloSeccion numero="01" titulo="Sobre mí" />
+        <TituloSeccion titulo="Sobre mí" />
 
         <p className="sobre-mi-parrafo font-display max-w-5xl text-3xl leading-tight font-medium tracking-tight text-foreground md:text-5xl">
           Soy desarrollador de software y construyo aplicaciones completas, de la base de datos a la

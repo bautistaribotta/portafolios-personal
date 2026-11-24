@@ -110,7 +110,7 @@ export function Habilidades() {
   return (
     <section ref={raiz} id="skills" tabIndex={-1} className="scroll-mt-16 outline-none overflow-hidden border-t py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <TituloSeccion numero="02" titulo="Habilidades" />
+        <TituloSeccion titulo="Habilidades" />
       </div>
 
       <div className="mb-4 space-y-2 motion-reduce:mb-16 md:motion-reduce:mb-24">
