@@ -1,8 +1,7 @@
 import { useRef } from "react"
-import { ArrowDown, FileDown, MapPin } from "lucide-react"
 
 import { Dispositivo, HUECO } from "@/components/dispositivo"
-import { IconoGithub, IconoLinkedin } from "@/components/iconos"
+import { IconoDescargarArchivo, IconoFlechaAbajo, IconoGithub, IconoLinkedin, IconoUbicacion } from "@/components/iconos"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tooltip } from "@/components/ui/tooltip"
@@ -179,7 +178,7 @@ export function Hero() {
                   download="Bautista_Ribotta_CV.pdf"
                   target="_blank"
                 >
-                  <FileDown />
+                  <IconoDescargarArchivo />
                   Descargar CV
                 </a>
               </Button>
@@ -220,7 +219,7 @@ export function Hero() {
               </div>
 
               <div className="hero-chip absolute -bottom-5 -left-8 hidden items-center gap-3 rounded-lg border bg-background/90 px-4 py-3 shadow-lg backdrop-blur-md lg:flex">
-                <MapPin className="size-4 text-highlight" />
+                <IconoUbicacion className="size-4 text-highlight" />
                 <div>
                   <p className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
                     Viviendo en
@@ -238,7 +237,7 @@ export function Hero() {
         className="hero-scroll absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
       >
         <span className="font-mono text-[10px] tracking-widest uppercase">Scroll</span>
-        <ArrowDown className="size-4 motion-safe:animate-bounce" />
+        <IconoFlechaAbajo className="size-4 motion-safe:animate-bounce" />
       </a>
     </section>
   )

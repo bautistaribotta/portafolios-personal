@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
-import { Pause, Play } from "lucide-react"
 
+import { IconoPausa, IconoReproducir } from "@/components/iconos"
 import { TituloSeccion } from "@/components/secciones/titulo-seccion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -126,7 +126,7 @@ export function Habilidades() {
           onClick={() => setPausado((p) => !p)}
           className="text-muted-foreground"
         >
-          {pausado ? <Play /> : <Pause />}
+          {pausado ? <IconoReproducir /> : <IconoPausa />}
           {pausado ? "Reanudar animación" : "Pausar animación"}
         </Button>
       </div>

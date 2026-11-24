@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
-import { Menu } from "lucide-react"
 
+import { IconoMenu } from "@/components/iconos"
 import { SelectorTema } from "@/components/selector-tema"
 import { Button } from "@/components/ui/button"
 import { navegacion } from "@/data/contenido"
@@ -92,7 +92,7 @@ export function Encabezado({ tema, onCambiarTema }: Props) {
                 setMenuAbierto(true)
               }}
             >
-              <Menu />
+              <IconoMenu />
             </Button>
             {menuPedido && (
               <Suspense fallback={null}>

@@ -1,12 +1,12 @@
-import { Leaf, Moon } from "lucide-react"
 
+import { IconoHoja, IconoLuna } from "@/components/iconos"
 import { Tooltip } from "@/components/ui/tooltip"
 import type { Tema } from "@/hooks/use-tema"
 import { cn } from "@/lib/utils"
 
 const opciones = [
-  { valor: "negro", etiqueta: "Tema negro", Icono: Moon },
-  { valor: "verde", etiqueta: "Tema verde", Icono: Leaf },
+  { valor: "negro", etiqueta: "Tema negro", Icono: IconoLuna },
+  { valor: "verde", etiqueta: "Tema verde", Icono: IconoHoja },
 ] as const
 
 type Props = {

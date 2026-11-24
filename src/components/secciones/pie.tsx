@@ -1,13 +1,11 @@
-import { Mail } from "lucide-react"
-
-import { IconoGithub, IconoLinkedin } from "@/components/iconos"
+import { IconoCorreo, IconoGithub, IconoLinkedin } from "@/components/iconos"
 import { Separator } from "@/components/ui/separator"
 import { redes } from "@/data/contenido"
 
 const enlaces = [
   { href: redes.github, etiqueta: "GitHub", Icono: IconoGithub },
   { href: redes.linkedin, etiqueta: "LinkedIn", Icono: IconoLinkedin },
-  { href: redes.email, etiqueta: "Email", Icono: Mail },
+  { href: redes.email, etiqueta: "Email", Icono: IconoCorreo },
 ]
 
 export function Pie() {

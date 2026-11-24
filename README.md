@@ -7,7 +7,7 @@ Sitio web personal para la exhibición de proyectos y habilidades técnicas.
 * React 19 + TypeScript
 * Vite
 * Tailwind CSS v4
-* shadcn/ui (Radix UI + lucide-react)
+* shadcn/ui (Radix UI) con íconos propios
 * Fuentes Geist (Sans, Mono y Serif)
 
 ## Temas

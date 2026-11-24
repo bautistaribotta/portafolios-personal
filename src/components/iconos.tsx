@@ -1,6 +1,204 @@
 import type { SVGProps } from "react"
 
-// Las marcas no estan en lucide-react, asi que las dejo como SVG propios
+/*
+  Set propio de iconos, en grilla de 24: trazo de 2px, extremos rectos, esquinas en inglete,
+  cortes a 45 grados y un bloque macizo como acento (el cursor de una terminal).
+*/
+function Icono({ children, ...props }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      aria-hidden="true"
+      {...props}
+    >
+      {children}
+    </svg>
+  )
+}
+
+const Macizo = ({ d }: { d: string }) => <path d={d} fill="currentColor" stroke="none" />
+
+export function IconoMenu(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M3 7h18M3 17h10" />
+      <Macizo d="M16 15h5v4h-5z" />
+    </Icono>
+  )
+}
+
+export function IconoCerrar(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="m4.5 4.5 15 15M19.5 4.5 14 10M10 14l-5.5 5.5" />
+    </Icono>
+  )
+}
+
+export function IconoTilde(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="m3 12.5 2.8-2.5 3.7 3.8L19 4.5 21.5 7l-12 12.5z" />
+    </Icono>
+  )
+}
+
+export function IconoCorreo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M3 5h18v10l-4 4H3zM3 7l9 6.5L21 7" />
+    </Icono>
+  )
+}
+
+export function IconoEnviar(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="m3 4 18 8H7z" />
+      <path d="m6.5 12-3 7L20 12" />
+    </Icono>
+  )
+}
+
+export function IconoReproducir(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="M6 3.5 19 11v2L6 20.5z" />
+    </Icono>
+  )
+}
+
+export function IconoPausa(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="M5 4h5v16H5zM14 4h5v16h-5z" />
+    </Icono>
+  )
+}
+
+export function IconoFlechaAbajo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M12 3v10" />
+      <Macizo d="M5 12h14l-7 9z" />
+    </Icono>
+  )
+}
+
+export function IconoFlechaDiagonal(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="m5 19 9-9" />
+      <Macizo d="M8 5h11v11z" />
+    </Icono>
+  )
+}
+
+export function IconoDescargarArchivo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M5 3h14v13l-5 5H5zM12 6v5" />
+      <Macizo d="M8 10.5h8l-4 5z" />
+    </Icono>
+  )
+}
+
+export function IconoUbicacion(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M5 3h14v9.5l-7 8.5-7-8.5z" />
+      <Macizo d="M10 7h4v4h-4z" />
+    </Icono>
+  )
+}
+
+export function IconoEnlaceExterno(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M10 4H4v16h12l4-4v-2M10 14l6-6" />
+      <Macizo d="M12 3h9v9z" />
+    </Icono>
+  )
+}
+
+export function IconoCodigo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="m8 5-6 7 6 7M16 5l6 7-6 7" />
+      <Macizo d="M10 10h4v4h-4z" />
+    </Icono>
+  )
+}
+
+export function IconoAmpliar(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M7 17 17 7" />
+      <Macizo d="M13 3h8v8zM3 13v8h8z" />
+    </Icono>
+  )
+}
+
+export function IconoBirrete(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="m12 3 11 6-11 6L1 9z" />
+      <path d="M6 13.5V19h12v-5.5M22 9.5V17" />
+    </Icono>
+  )
+}
+
+export function IconoObjetivo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="m12 2.5 9.5 9.5-9.5 9.5L2.5 12z" />
+      <Macizo d="m12 8 4 4-4 4-4-4z" />
+    </Icono>
+  )
+}
+
+export function IconoHoja(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <path d="M21 3h-9L6 9v9h9l6-6zM2.5 21.5 6 18" />
+      <Macizo d="M21 3v9l-6 6H6z" />
+    </Icono>
+  )
+}
+
+export function IconoLuna(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="M13 3H8L3 8v8l5 5h8l5-5v-5l-4 4h-4l-4-4V7z" />
+    </Icono>
+  )
+}
+
+export function IconoCargando(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icono {...props}>
+      <Macizo d="M10 2h4v4h-4z" />
+      <g opacity="0.65">
+        <Macizo d="M18 10h4v4h-4z" />
+      </g>
+      <g opacity="0.4">
+        <Macizo d="M10 18h4v4h-4z" />
+      </g>
+      <g opacity="0.2">
+        <Macizo d="M2 10h4v4H2z" />
+      </g>
+    </Icono>
+  )
+}
+
+// Marcas: conservan su logo oficial
 
 export function IconoGithub(props: SVGProps<SVGSVGElement>) {
   return (

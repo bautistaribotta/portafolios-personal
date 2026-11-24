@@ -1,6 +1,6 @@
 import { useRef } from "react"
-import { GraduationCap, Target } from "lucide-react"
 
+import { IconoBirrete, IconoObjetivo } from "@/components/iconos"
 import { TituloSeccion } from "@/components/secciones/titulo-seccion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { estadisticas } from "@/data/contenido"
@@ -9,13 +9,13 @@ import { gsap, MEDIOS, SplitText, useGSAP } from "@/lib/animaciones"
 const tarjetas = [
   {
     titulo: "Educación",
-    Icono: GraduationCap,
+    Icono: IconoBirrete,
     texto:
       "Estoy finalizando la carrera de Ingeniería en Software y complemento esa base con cursos en plataformas como Platzi y Udemy. Aplico lo que aprendo en proyectos propios y para clientes, y busco sumarme a un equipo donde seguir creciendo junto a otros profesionales.",
   },
   {
     titulo: "Enfoque",
-    Icono: Target,
+    Icono: IconoObjetivo,
     texto:
       "Desarrollo aplicaciones web y mobile de punta a punta. Trabajo el backend con Python y Django, el frontend con React, TypeScript y Tailwind, y las apps mobile con React Native y Expo. Sumo herramientas de IA como Claude Code a mi flujo de trabajo para desarrollar más rápido.",
   },

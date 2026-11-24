@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react"
-import { Check, Loader2, Mail, Send } from "lucide-react"
 
+import { IconoCargando, IconoCorreo, IconoEnviar, IconoTilde } from "@/components/iconos"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -89,7 +89,7 @@ export function Contacto() {
               href="mailto:bautistaribotta@hotmail.com"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              <Mail className="size-4 text-highlight" />
+              <IconoCorreo className="size-4 text-highlight" />
               bautistaribotta@hotmail.com
             </a>
           </div>
@@ -131,9 +131,9 @@ export function Contacto() {
                 </div>
                 <div className="flex items-center gap-4">
                   <Button type="submit" disabled={estado === "enviando" || estado === "enviado"}>
-                    {estado === "enviando" && <Loader2 className="animate-spin" />}
-                    {estado === "enviado" && <Check />}
-                    {(estado === "inicial" || estado === "error") && <Send />}
+                    {estado === "enviando" && <IconoCargando className="animate-spin" />}
+                    {estado === "enviado" && <IconoTilde />}
+                    {(estado === "inicial" || estado === "error") && <IconoEnviar />}
                     {estado === "inicial" && "Enviar mensaje"}
                     {estado === "enviando" && "Enviando..."}
                     {estado === "enviado" && "Mensaje enviado"}

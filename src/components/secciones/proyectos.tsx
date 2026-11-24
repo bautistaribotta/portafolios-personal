@@ -1,8 +1,7 @@
 import { lazy, Suspense, useRef, useState, type CSSProperties, type FocusEvent } from "react"
-import { ArrowUpRight, Code2, ExternalLink, Maximize2 } from "lucide-react"
 
 import { Dispositivo, HUECO, RECORTE } from "@/components/dispositivo"
-import { IconoGithub } from "@/components/iconos"
+import { IconoAmpliar, IconoCodigo, IconoEnlaceExterno, IconoFlechaDiagonal, IconoGithub } from "@/components/iconos"
 import { TituloSeccion } from "@/components/secciones/titulo-seccion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -76,7 +75,7 @@ function TextoProyecto({ p, i }: { p: Proyecto; i: number }) {
           className="group/titulo inline-flex items-center gap-2 transition-colors hover:text-highlight"
         >
           {p.nombre}
-          <ArrowUpRight className="size-6 text-muted-foreground transition-transform group-hover/titulo:translate-x-0.5 group-hover/titulo:-translate-y-0.5" />
+          <IconoFlechaDiagonal className="size-6 text-muted-foreground transition-transform group-hover/titulo:translate-x-0.5 group-hover/titulo:-translate-y-0.5" />
         </a>
       </h3>
       {p.enDesarrollo && (
@@ -99,7 +98,7 @@ function TextoProyecto({ p, i }: { p: Proyecto; i: number }) {
           {p.enVivo && (
             <Button asChild size="sm" variant="outline">
               <a href={p.enVivo} target="_blank" rel="noopener noreferrer">
-                <ExternalLink />
+                <IconoEnlaceExterno />
                 Ver en vivo
               </a>
             </Button>
@@ -107,7 +106,7 @@ function TextoProyecto({ p, i }: { p: Proyecto; i: number }) {
           {p.codigo && (
             <Button asChild size="sm" variant="ghost">
               <a href={p.codigo} target="_blank" rel="noopener noreferrer">
-                <Code2 />
+                <IconoCodigo />
                 Código
               </a>
             </Button>
@@ -281,7 +280,7 @@ function ProyectosEscritorio({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }
             aria-label={`Ampliar captura: ${proyectos[activo].nombre}`}
             className="absolute right-[7.5%] bottom-[18%] flex size-9 items-center justify-center rounded-md border bg-background/80 text-foreground backdrop-blur-sm transition-colors outline-none hover:bg-background focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
-            <Maximize2 className="size-4" />
+            <IconoAmpliar className="size-4" />
           </button>
         </div>
 
@@ -354,7 +353,7 @@ function ProyectosEscenas({ onAmpliar }: { onAmpliar: (p: Proyecto) => void }) {
               aria-label={`Ampliar captura: ${p.nombre}`}
               className="absolute right-[7.5%] bottom-[18%] flex size-8 items-center justify-center rounded-md border bg-background/80 text-foreground backdrop-blur-sm"
             >
-              <Maximize2 className="size-3.5" />
+              <IconoAmpliar className="size-3.5" />
             </button>
           </div>
           <div className="proyecto-texto relative">
@@ -397,7 +396,7 @@ export function Proyectos() {
           <a href={redes.github} target="_blank" rel="noopener noreferrer">
             <IconoGithub />
             Ver todos los proyectos en GitHub
-            <ArrowUpRight />
+            <IconoFlechaDiagonal />
           </a>
         </Button>
       </div>
